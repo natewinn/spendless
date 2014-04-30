@@ -15,7 +15,11 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-		redirect_to users_path
+		if @user.save
+			redirect_to users_path
+		else
+			"error"
+		end
 	end
 
 	def edit
@@ -42,8 +46,8 @@ class UsersController < ApplicationController
 	def set_user
 		@user = User.find(params[:id])
 	end
-	
+
 	def user_params
-		params.require(:user).permit(:first_name, :last_name, :email, :password, :phone_number, :bithday)
+		params.require(:user).permit!
 	end
 end

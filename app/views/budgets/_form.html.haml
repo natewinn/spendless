@@ -19,7 +19,7 @@
           .form-group
             = f.label "Who's account is it?", :class => "col-lg-2 control-label"
             .col-lg-10
-              = f.select :user_id, User.all.collect {|u| [(u.first_name + " " + u.first_name), u.id]}, { include_blank: true }, :class => "form-control"
+              = f.select :user_id, User.all.collect {|u| [(u.first_name + " " + u.last_name), u.id]}, { include_blank: true }, :class => "form-control"
           .actions
             .form-group
               .col-lg-10.col-lg-offset-2
