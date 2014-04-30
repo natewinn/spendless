@@ -1,8 +1,8 @@
 .container
 	%legend User Profile
 	  
-	%table.table.table-hover
-		%thead
+	%table.table.table-striped.table-hover
+		.thead
 			%tr
 				%th First Name
 				%th Last Name
@@ -11,8 +11,8 @@
 				%th Phone Number
 				%th Birthday
 				%th Update Profile
-		%tbody
-			-@users.each do |user|
+		.tbody
+			- @users.each do |user|
 				%tr
 					%td= user.first_name
 					%td= user.last_name
@@ -21,3 +21,4 @@
 					%td= user.phone_number
 					%td= user.birthday
 					%td= link_to "Update", edit_user_path, :class => "button btn btn-success"
+	= link_to "Add a User", new_user_path, :class => "btn btn-success"
