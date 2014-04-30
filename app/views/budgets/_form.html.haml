@@ -1,1 +1,27 @@
-_form.html.haml
+= form_for @budget do |f|
+  .form-horizontal
+    .fieldset
+      .form-group
+        .col-lg-6
+          .form-group
+            = f.label "Limit", :class => "col-lg-2 control-label"
+            .input-group
+              .input-group-addon $
+              = f.text_field :limit, :class => "form-control"
+          .form-group
+            = f.label :start_date, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.date_select :start_date, :class => "form-control"
+          .form-group
+            = f.label :end_date, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.date_select :end_date, :class => "form-control"
+          .form-group
+            = f.label "Who's account is it?", :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.select :user_id, User.all.collect {|u| [(u.first_name + " " + u.first_name), u.id]}, { include_blank: true }, :class => "form-control"
+          .actions
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                = f.submit 'Save', :class => "btn btn-primary"
+                = link_to 'Cancel', budgets_path, :class => "btn btn-default"
