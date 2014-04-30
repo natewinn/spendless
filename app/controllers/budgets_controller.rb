@@ -23,6 +23,11 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = Budget.new(budget_params)
+    if @budget.save
+      redirect_to budgets_path
+    else
+      "error"
+    end
   end
 
 
