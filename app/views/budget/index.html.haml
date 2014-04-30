@@ -1,0 +1,11 @@
+%legend Budgets
+%table.table.table-striped.table-hover
+  .thead
+    %tr
+      %th= Budget Id
+      %th= Limit
+  .tbody
+    - @budgets.each do |budget|
+      %tr
+        %td= budget.id
+        %td= budget.limit
