@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
 
   def index
-    @transaction = Transaction.all
+    @transactions = Transaction.all
   end
 
 
@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
 
 
   def new
-    @transaction = Transaction.new
+    @new_transaction = Transaction.new
   end
 
 
@@ -21,13 +21,24 @@ class TransactionsController < ApplicationController
 
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @new_transaction = Transaction.new(transaction_params)
+    if @new_transaction.save
+      redirect_to transactions_path
+    else
+      redirect_to new_transactions_path
+    end
+  end
+
+  def search
+    @transactions = (Transaction.search(params[:search])).order(params[:sort])
+    render :index
   end
 
 
   def update
+    @transaction = Transaction.find(params[:id])
     if @transaction.update(transaction_params)
-      redirect transactions_path
+      redirect_to transactions_path
     else
       "error"
     end
@@ -35,8 +46,9 @@ class TransactionsController < ApplicationController
 
 
   def destroy
+    @transaction = Transaction.find(params[:id])
     if @transaction.destroy
-      redirect transactions_path
+      redirect_to transactions_path
     else
       "error"
     end
@@ -44,11 +56,11 @@ class TransactionsController < ApplicationController
   
   private
 
-  def set_budget
+  def set_transaction
     @transaction = Transaction.find(params[:id])
   end
 
-  def budget_params
+  def transaction_params
     params.require(:transaction).permit!
   end
 

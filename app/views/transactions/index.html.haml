@@ -1,0 +1,25 @@
+.container
+	.row
+		.col-md-12
+			%table{ :style => "margin:0 auto; border-bottom:1px #ddd solid; text-align:center"}
+				%tbody
+					%tr
+						%th{ :class => "col-sm-1", :style => "text-align:center"}= "Type of transaction"
+						%th{ :class => "col-sm-3", :style => "text-align:center"}= "Amount"
+						%th{ :class => "col-sm-1",:style => "text-align:center"}= "Transaction to/from"
+						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Category"
+						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Account"
+						- @transactions.each do |t|
+							- if t.transaction_type == 'Deposit'
+								%tr{ :style => "background-color:rgba(112, 247, 144, 0.29); border-bottom:1px #c4c4c4 solid"}
+									=render 'deposit', t: t
+							- else t.transaction_type == 'Withdrawal'
+								%tr{ :style => "background-color:rgba(226, 93, 93, 0.57); border-bottom:1px #c4c4c4 solid"}
+									=render 'withdrawal', t: t
+
+
+			%br
+			%br
+			= button_to "Add Transaction", new_transaction_path, method: :get
+	
+
