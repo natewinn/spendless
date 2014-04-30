@@ -1,22 +1,23 @@
-%h3 User Profile
-  
-%table.table.table-hover
-	%thead
-		%tr
-			%th First Name
-			%th Last Name
-			%th Email
-			%th Password
-			%th Phone Number
-			%th Birthday
-			%th Update Profile
-	%tbody
-		-@user.each do |user|
+.container
+	%legend User Profile
+	  
+	%table.table.table-hover
+		%thead
 			%tr
-				%td= user.first_name
-				%td= user.last_name
-				%td= user.email
-				%td= user.password
-				%td= user.phone_number
-				%td= user.birthday
-				%td= link_to "Update", "/users/#{user.id}"/edit", :method => :get, :class => "button btn btn-success"
+				%th First Name
+				%th Last Name
+				%th Email
+				%th Password
+				%th Phone Number
+				%th Birthday
+				%th Update Profile
+		%tbody
+			-@users.each do |user|
+				%tr
+					%td= user.first_name
+					%td= user.last_name
+					%td= user.email
+					%td= user.password
+					%td= user.phone_number
+					%td= user.birthday
+					%td= link_to "Update", edit_user_path, :class => "button btn btn-success"
