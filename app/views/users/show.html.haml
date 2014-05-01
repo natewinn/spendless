@@ -1,0 +1,14 @@
+/= User Profile =/
+/ = Location Record = /
+.container
+	%legend 
+		Profile for #{@user.first_name} #{@user.last_name}
+		.col-md-12
+			%h6.col.md-4
+			%h4 Name:  #{@user.first_name} #{@user.last_name}
+			%h4 Email:  #{@user.email}
+			%h4 Password:  #{@user.password}
+			%h4 Phone Number:  #{@user.phone_number}
+			%h4 Birthday:  #{@user.birthday}
+			= link_to 'Return to Transactions', users_path, :class => "btn btn-success"
+			.col.md-8

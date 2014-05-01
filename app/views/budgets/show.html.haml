@@ -1,0 +1,9 @@
+.container
+  %legend Check Out Your Budget
+
+  - @budget.each do |budget|
+    .panel.panel-success
+      .panel-heading
+        %h3 Limit
+      .panel-body
+        = "$" + budget.limit
