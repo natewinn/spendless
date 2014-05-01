@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+	def full_title(page_title)
+		base_title = "Spendless"
+		page_title.empty? ?  base_title : "#{base_title} | #{page_title}"
+	end
+
   def money(num)
     number_to_currency(num)
   end
