@@ -1,5 +1,9 @@
 .container
-  %legend= "Hey, " + @budget.user.first_name + "! Check out your budget."
+  .row
+    %legend
+      = "Hey, " + @budget.user.first_name + "! Check out your budget."
+      = link_to "Edit", edit_budget_path(@budget), :class => "btn btn-sm btn-warning"
+        
 
   .col-lg-6
     .panel.panel-success
@@ -13,14 +17,17 @@
         %h3 Time Remaining
       .panel-body
         %h4= budget_countdown(@budget)
-  .row
-    .col-md-6.col-md-offset-3
-      %br
-      %br
-      .btn-group.btn-group-justified
-        = link_to "Back", budgets_path, :class => "btn btn-default"
-        = link_to "Edit", edit_budget_path(@budget), :class => "btn btn-warning"
-        = link_to "Delete", @budget, :method => :delete, :data => { :confirm => "Are you sure?" }, :class => "btn btn-danger"
+  .col-lg-6
+    .blockquote
+      %p Delete this budget?
+      .well
+        = link_to "Delete", @budget, :method => :delete, :data => { :confirm => "Are you sure?" }, :class => "btn btn-md btn-danger"
+  %br
+.container
+  %br
+  %br
+  .col-lg-6
+    = link_to "Back", budgets_path, :class => "btn btn-default"
 
 / %div.progress.progress-striped.active
 /    %div.progress-bar{role: "progressbar", "aria-valuenow" => "#{@progress}", "aria-valuemin" => "0", "aria-valuemax" => "100", style: "width: #{@budget.limit / 100}"}
