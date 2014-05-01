@@ -1,9 +1,27 @@
 .container
-  %legend Check Out Your Budget
+  %legend= "Hey, " + @budget.user.first_name + "! Check out your budget."
 
-  - @budget.each do |budget|
+  .col-lg-6
     .panel.panel-success
       .panel-heading
         %h3 Limit
       .panel-body
-        = "$" + budget.limit
+        %h4= money(@budget.limit)
+  .col-lg-6
+    .panel.panel-info
+      .panel-heading
+        %h3 Time Remaining
+      .panel-body
+        %h4= budget_countdown(@budget)
+  .row
+    .col-md-6.col-md-offset-3
+      %br
+      %br
+      .btn-group.btn-group-justified
+        = link_to "Back", budgets_path, :class => "btn btn-default"
+        = link_to "Edit", edit_budget_path(@budget), :class => "btn btn-warning"
+        = link_to "Delete", @budget, :method => :delete, :data => { :confirm => "Are you sure?" }, :class => "btn btn-danger"
+
+/ %div.progress.progress-striped.active
+/    %div.progress-bar{role: "progressbar", "aria-valuenow" => "#{@progress}", "aria-valuemin" => "0", "aria-valuemax" => "100", style: "width: #{@budget.limit / 100}"}
+/      %span.sr-only
