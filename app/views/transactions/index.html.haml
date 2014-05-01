@@ -13,7 +13,7 @@
 				%th= "Transaction date"
 		.tbody
 		- @transactions.each do |t|
-			- if t.transaction_type == 'incoming'
+			- if t.transaction_type == 'deposit'
 				%tr.success
 					%td= t.transaction_type
 					%td= money(t.amount)

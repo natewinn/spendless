@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-<<<<<<< HEAD
-=======
   before_filter :ensure_logged_in
 
   helper_method :current_user
@@ -20,6 +18,4 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
-  
->>>>>>> 23343946d000e3feb575a6bba077a5597c594234
 end
