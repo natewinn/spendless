@@ -1,0 +1,18 @@
+=f.label "User name:"
+%br
+= f.select :user_id, User.all.collect {|u| [u.first_name + u.last_name, u.id]}
+%br
+= f.label :account_type
+%br
+= f.text_field :account_type
+%br
+= f.label :bank
+%br
+= f.text_field :bank
+%br
+= f.label :balance
+%br
+=f.number_field :balance
+
+%br
+= f.submit

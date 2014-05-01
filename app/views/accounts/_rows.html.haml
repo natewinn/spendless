@@ -1,0 +1,6 @@
+%td{ :style => "padding:15px"}= "#{a.account_type}"
+%td{ :style => "padding:15px"}= "#{a.bank}"
+%td{ :style => "padding:15px"}= "#{a.balance}"
+%td{ :style => "padding:15px"}= "#{User.where(id: a.user_id).pluck(:first_name).first} #{User.where(id: a.user_id).pluck(:last_name).first}"
+%td{ :style => "padding:15px"}= button_to "Edit", edit_account_path(a), method: :get
+%td{ :style => "padding:15px"}= button_to "Delete", account_path(a), method: :delete

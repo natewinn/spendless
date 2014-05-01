@@ -1,0 +1,19 @@
+.container
+	.row
+		.col-md-12
+			%table{ :style => "margin:0 auto; border-bottom:1px #ddd solid; text-align:center"}
+				%tbody
+					%tr
+						%th{ :class => "col-sm-1", :style => "text-align:center"}= "Account type"
+						%th{ :class => "col-sm-1", :style => "text-align:center"}= "Bank Name"
+						%th{ :class => "col-sm-3", :style => "text-align:center"}= "Balance"
+						%th{ :class => "col-sm-1",:style => "text-align:center"}= "User name"
+						- @accounts.each do |a|
+							%tr
+								=render 'rows', a: a
+
+
+			%br
+			%br
+			= button_to "Add Account", new_account_path, method: :get
+
