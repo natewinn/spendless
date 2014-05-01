@@ -16,4 +16,9 @@ module ApplicationHelper
   def phone(phone_number)
     number_to_phone(phone_number, area_code: true)  
   end
+
+  def format_date(date)
+    change_date_format(date).try(:strftime, "%B %d, %Y")
+  end
+
 end

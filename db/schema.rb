@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430222904) do
+ActiveRecord::Schema.define(version: 20140501200043) do
 
   create_table "accounts", force: true do |t|
     t.string  "account_type"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140430222904) do
     t.string "password"
     t.string "phone_number"
     t.date   "birthday"
+    t.string "password_digest"
   end
 
 end

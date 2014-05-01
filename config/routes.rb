@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
-  root to:'transactions#index'
+  get 'login' => 'sessions#new'
+  get 'logout' => 'sessions#destroy'
 
-  resources :users
+  resources :users do
+    member do
+      get :dashboard
+    end
+  end
 
   resources :accounts
 
@@ -13,6 +18,8 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  resources :sessions, only: [:new, :create, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

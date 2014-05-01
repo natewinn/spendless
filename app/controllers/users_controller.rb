@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	skip_filter :ensure_logged_in, only: [:new, :create]
 
 	def index
 		@users = User.all
@@ -39,6 +40,10 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.delete
 		redirect_to users_path
+	end
+
+	def dashboard
+		@user = User.find(params[:id])
 	end
 
 	private
