@@ -20,6 +20,7 @@
 					%td= t.name
 					%td= t.category
 					%td= t.transaction_date
+					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 			- else
 				%tr.danger
 					%td= t.transaction_type
@@ -27,6 +28,7 @@
 					%td= t.name
 					%td= t.category
 					%td= t.transaction_date
+					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
 
 .container

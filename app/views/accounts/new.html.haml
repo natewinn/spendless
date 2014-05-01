@@ -1,5 +1,4 @@
 .container
-	.row
-		.col-md-12
-		= form_for @new_account, url: accounts_path do |f|
-			= render "form", f: f
+  %legend New Account
+
+  = render 'form'
