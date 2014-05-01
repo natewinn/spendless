@@ -30,8 +30,9 @@ class TransactionsController < ApplicationController
   end
 
   def search
-    @transactions = (Transaction.search(params[:search])).order(params[:sort])
+    @transactions = Transaction.search(params[:search])
     render :index
+    
   end
 
 
