@@ -29,48 +29,46 @@
 						%br
 						%br
 		
-		= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
-	
-	%br
-	%br
-	.container
-		.row
-			.col-md-12
-				%border-bottom
+	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
+
+.container
+	.row
+		.col-md-12
+			%border-bottom
+			%br
+			
+			= form_tag search_transactions_path, method: :get do
+				Search by:
 				%br
 				
-				= form_tag search_transactions_path, method: :get do
-					Search by:
-					%br
-					
-					User Name:
-					= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
-					%br
-					Transaction type:
-					= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
+				User Name:
+				= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
+				%br
+				Transaction type:
+				= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
+			
+				Transaction Category:
+				= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
+
+				Transaction business:
+				= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
+
+				%br
+
+				Search by amount range:
+				= label_tag "Amount range start"
+				= number_field_tag 'search[begin_amount]'
+				= label_tag "Amount range end"
+				= number_field_tag 'search[end_amount]'
+
+				%br
 				
-					Transaction Category:
-					= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
+				Search by date range:
+				= label_tag "Begin date"
+				= date_field_tag "search[begin_date]"
+				= label_tag "End date"
+				= date_field_tag "search[end_date]"
 
-					Transaction business:
-					= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
-
-					%br
-
-					Search by amount range:
-					= label_tag "Amount range start"
-					= number_field_tag 'search[begin_amount]'
-					= label_tag "Amount range end"
-					= number_field_tag 'search[end_amount]'
-
-					%br
-					
-					Search by date range:
-					= label_tag "Begin date"
-					= date_field_tag "search[begin_date]"
-					= label_tag "End date"
-					= date_field_tag "search[end_date]"
-
-					= submit_tag "Search"
-					%br
-					%br
+				= submit_tag "Search"
+				%br
+				%br
