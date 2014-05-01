@@ -18,7 +18,12 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    change_date_format(date).try(:strftime, "%B %d, %Y")
+
+    if !date.nil?
+      date.strftime("%B %d, %Y")
+    else
+      "No record"
+    end
   end
 
 end
