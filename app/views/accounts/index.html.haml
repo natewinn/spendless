@@ -13,5 +13,4 @@
 			- @accounts.each do |a|
 				%tr						
 					=render 'rows', a: a
-	%br
 	= button_to "Add Account", new_account_path, method: :get, :class => "btn btn-xs btn-success"

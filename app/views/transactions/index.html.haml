@@ -1,10 +1,6 @@
 .container
 	%legend Account Transactions
-
-	/= Transactions Table View =/
 	%table.table.table-hover
-		
-		/= Table Header =/
 		.thead
 			%tr
 				%th= "Type of transaction"
@@ -12,13 +8,9 @@
 				%th= "Transaction to/from"
 				%th= "Category"
 				%th= "Transaction date"
-		
-		/= Table Rows =/
 		.tbody
 			- @transactions.each do |t|
 				- if t.transaction_type == 'deposit'
-					
-					/= Credits Display as Green =/
 					%tr.success
 						%td= t.transaction_type
 						%td= money(t.amount)
@@ -26,8 +18,6 @@
 						%td= t.category
 						%td= t.transaction_date
 				- else
-
-					/= Debits Display as Red =/
 					%tr.danger
 						%td= t.transaction_type
 						%td= money(t.amount)
@@ -64,8 +54,8 @@
 					Transaction Category:
 					= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
 
-						Transaction business:
-						= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
+					Transaction business:
+					= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
 
 					%br
 

@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Spendless
+    %title= full_title(yield :title)
     = favicon_link_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
