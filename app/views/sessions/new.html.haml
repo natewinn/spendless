@@ -1,0 +1,28 @@
+.container 
+  %legend Login
+
+  / = form_tag sessions_path do
+  /   = label_tag :email
+  /   = text_field_tag :email, params[:email]
+  /   = password_field_tag :password
+  /   %br
+  /   = submit_tag "Login"
+
+  = form_tag sessions_path do
+    .form-horizontal
+      .fieldset
+        .form-group
+          .col-lg-6
+            .form-group
+              = label_tag :email, nil, class: "col-lg-2 control-label"
+              .col-lg-10
+                = text_field_tag :email, params[:email], class: "form-control", type: "email"
+            .form-group
+              = label_tag :password, nil, class: "col-lg-2 control-label"
+              .col-lg-10
+                = text_field_tag :password, nil, class: "form-control", type: "password"
+            .actions
+              .form-group
+                .col-lg-10.col-lg-offset-2
+                  = submit_tag 'Login', :class => "btn btn-primary"
+                  = link_to 'Sign Up', new_user_path, :class => "btn btn-success"
