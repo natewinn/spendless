@@ -25,13 +25,21 @@
           %li
             = link_to "Transactions", transactions_path
         %form.navbar-form.navbar-left
-          %input.form-control.col-lg-8{placeholder: "Find something...", type: "text"}/
+          .form-group
+          %input.col-lg-8
+            = text_field_tag "search[string_keyword]", :class => "form-control", placeholder: "Search by keyword...", type: string_keyword
+            / .form-group
+            / = f.label :first_name, :class => "col-lg-2 control-label"
+            / .col-lg-10
+            /   = f.text_field :first_name, :class => "form-control", type: "first_name"
         %ul.nav.navbar-nav.navbar-right
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               Direct Add
               %b.caret
             %ul.dropdown-menu
+              / %li
+              /   = link_to "Logout", logout_path
               %li
                 = link_to "Add a User", new_user_path
               %li

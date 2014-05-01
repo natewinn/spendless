@@ -46,6 +46,10 @@ class Transaction < ActiveRecord::Base
 		where('user_id = ?', user_id)
 	end
 
+	def self.by_string_keyword(string_keyword)
+		where('name = ? OR transaction_type = ?', string_keyword, string_keyword)
+	end
+
 
   def self.search(params)
   	cat = params[:cat]
@@ -56,6 +60,7 @@ class Transaction < ActiveRecord::Base
   	begin_amount = params[:begin_amount]
   	end_amount = params[:end_amount]
   	user_id = params[:user_id]
+  	string_keyword = params[:string_keyword]
 
   	search = self.all
 
@@ -75,6 +80,10 @@ class Transaction < ActiveRecord::Base
 
   	if user_id.present?
   		search = search.by_user_name(user_id)
+  	end
+
+  	if string_keyword.present
+  		search = search.by_string_keyword(string_keyword)
   	end
 
   	# if trans_date.present?
