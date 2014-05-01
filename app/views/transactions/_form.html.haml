@@ -8,6 +8,10 @@
             .col-lg-10
               = f.select :user_id, User.all.collect {|u| [(u.first_name + " " + u.last_name), u.id]}, :class => "form-control"
           .form-group
+            = f.label "Transaction with:", :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :name, :class => "form-control"
+          .form-group
             = f.label "Amount", :class => "col-lg-2 control-label"
             .input-group
               .input-group-addon $
@@ -23,7 +27,8 @@
           .form-group
             = f.label "Transaction type:", :class => "col-lg-2 control-label"
             .col-lg-10
-              = f.select :transaction_type, options_for_select([["Deposit", "deposit"], ["Withdrawl", "withdrawl"]]), :class => "form-control"
+              = f.select :transaction_type, options_for_select([["Incoming", "incoming"], ["Outgoing", "outgoing"]]), :class => "form-control"
+
           .actions
             .form-group
               .col-lg-10.col-lg-offset-2
