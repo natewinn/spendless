@@ -1,5 +1,4 @@
 .container
-<<<<<<< HEAD
 	%legend Transactions
 
 	%table.table.table-hover
@@ -42,19 +41,12 @@
 				= form_tag search_transactions_path, method: :get do
 					Search by:
 					%br
+					
 					Transaction type:
 					= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
 				
 					Transaction Category:
 					= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
-				User Name:
-				= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
-				%br
-				Transaction type:
-				= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
-			
-				Transaction Category:
-				= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
 
 					Transaction business:
 					= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
