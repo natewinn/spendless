@@ -42,6 +42,10 @@ class Transaction < ActiveRecord::Base
 		where('transaction_amount BETWEEN ? AND ?', begin_amount, end_amount)
 	end
 
+	def self.by_user_name(user_id)
+		where('user_id = ?', user_id)
+	end
+
 
   def self.search(params)
   	cat = params[:cat]
@@ -51,6 +55,7 @@ class Transaction < ActiveRecord::Base
   	amount = params[:amount]
   	begin_amount = params[:begin_amount]
   	end_amount = params[:end_amount]
+  	user_id = params[:user_id]
 
   	search = self.all
 
@@ -66,6 +71,10 @@ class Transaction < ActiveRecord::Base
 
   	if name.present?
   		search = search.by_name(name)
+  	end
+
+  	if user_id.present?
+  		search = search.by_user_name(user_id)
   	end
 
   	# if trans_date.present?
