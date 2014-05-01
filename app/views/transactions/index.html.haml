@@ -1,35 +1,52 @@
 .container
-	.row
-		.col-md-12
-			%table{ :style => "margin:0 auto; border-bottom:1px #ddd solid; text-align:center"}
-				%tbody
-					%tr
-						%th{ :class => "col-sm-1", :style => "text-align:center"}= "User name"
-						%th{ :class => "col-sm-1", :style => "text-align:center"}= "Type of transaction"
-						%th{ :class => "col-sm-3", :style => "text-align:center"}= "Amount"
-						%th{ :class => "col-sm-1",:style => "text-align:center"}= "Transaction to/from"
-						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Category"
-						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Account"
-						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Transaction date"
-						- @transactions.each do |t|
-							- if t.transaction_type == 'Incoming'
-								%tr{ :style => "background-color:rgba(112, 247, 144, 0.29); border-bottom:1px #c4c4c4 solid"}
-									=render 'deposit', t: t
-							- else t.transaction_type == 'Outgoing'
-								%tr{ :style => "background-color:rgba(226, 93, 93, 0.57); border-bottom:1px #c4c4c4 solid"}
-									=render 'withdrawal', t: t
+<<<<<<< HEAD
+	%legend Transactions
 
-
+	%table.table.table-hover
+		.thead
+			%tr
+				%th= "Type of transaction"
+				%th= "Amount"
+				%th= "Transaction to/from"
+				%th= "Category"
+				%th= "Transaction date"
+		.tbody
+			- @transactions.each do |t|
+				- if t.transaction_type == 'deposit'
+					%tr.success
+						%td= t.transaction_type
+						%td= money(t.amount)
+						%td= t.name
+						%td= t.category
+						%td= t.transaction_date
+				- else
+					%tr.danger
+						%td= t.transaction_type
+						%td= money(t.amount)
+						%td= t.name
+						%td= t.category
+						%td= t.transaction_date
 			%br
 			%br
-			= button_to "Add Transaction", new_transaction_path, method: :get
-	.row
-		.col-md-12
-			%border-bottom
-			%br
-			= form_tag search_transactions_path, method: :get do
-				Search by:
+	
+	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
+	
+	%br
+	%br
+	.container
+		.row
+			.col-md-12
+				%border-bottom
 				%br
+				
+				= form_tag search_transactions_path, method: :get do
+					Search by:
+					%br
+					Transaction type:
+					= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
+				
+					Transaction Category:
+					= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
 				User Name:
 				= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
 				%br
@@ -39,26 +56,26 @@
 				Transaction Category:
 				= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
 
-				Transaction business:
-				= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
+					Transaction business:
+					= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
 
-				%br
+					%br
 
-				Search by amount range:
-				= label_tag "Amount range start"
-				= number_field_tag 'search[begin_amount]'
-				= label_tag "Amount range end"
-				= number_field_tag 'search[end_amount]'
+					Search by amount range:
+					= label_tag "Amount range start"
+					= number_field_tag 'search[begin_amount]'
+					= label_tag "Amount range end"
+					= number_field_tag 'search[end_amount]'
 
-				%br
-				
-				Search by date range:
-				= label_tag "Begin date"
-				= date_field_tag "search[begin_date]"
-				= label_tag "End date"
-				= date_field_tag "search[end_date]"
+					%br
+					
+					Search by date range:
+					= label_tag "Begin date"
+					= date_field_tag "search[begin_date]"
+					= label_tag "End date"
+					= date_field_tag "search[end_date]"
 
-				= submit_tag "Search"
-				%br
-				%br
+					= submit_tag "Search"
+					%br
+					%br
 
