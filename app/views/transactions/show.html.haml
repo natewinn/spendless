@@ -1,0 +1,16 @@
+- content_for(:title, 'Transaction')
+
+.container
+  %legend
+    = "Transaction #" + @transaction.id.to_s
+    = link_to 'Delete', @transaction, method: "delete", :class => "btn btn-xs btn-danger"
+    .col-md-12
+      %h6.col.md-4
+      %h4= "Type: " + @transaction.transaction_type
+      %h4= "Amount: " + money(@transaction.amount)
+      %h4= "Category: " + @transaction.category
+      %h4= "Transaction Date: " + @transaction.transaction_date.strftime("%b %d, %Y")
+%br
+%br
+.container
+  = link_to 'Return to Transactions', transactions_path, :class => "btn btn-success"

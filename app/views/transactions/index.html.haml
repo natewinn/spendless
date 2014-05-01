@@ -2,6 +2,7 @@
 
 .container
 	%legend Transactions
+	
 	%table.table.table-hover
 		.thead
 			%tr
@@ -11,24 +12,23 @@
 				%th= "Category"
 				%th= "Transaction date"
 		.tbody
-			- @transactions.each do |t|
-				- if t.transaction_type == 'deposit'
-					%tr.success
-						%td= t.transaction_type
-						%td= money(t.amount)
-						%td= t.name
-						%td= t.category
-						%td= t.transaction_date
-				- else
-					%tr.danger
-						%td= t.transaction_type
-						%td= money(t.amount)
-						%td= t.name
-						%td= t.category
-						%td= t.transaction_date
-						%br
-						%br
-		
+		- @transactions.each do |t|
+			- if t.transaction_type == 'deposit'
+				%tr.success
+					%td= t.transaction_type
+					%td= money(t.amount)
+					%td= t.name
+					%td= t.category
+					%td= t.transaction_date
+					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+			- else
+				%tr.danger
+					%td= t.transaction_type
+					%td= money(t.amount)
+					%td= t.name
+					%td= t.category
+					%td= t.transaction_date
+					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
 
 .container

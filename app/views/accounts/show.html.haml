@@ -1,0 +1,31 @@
+.container
+  .row
+    %legend
+      = "Hey, " + @account.user.first_name + "! Review your account."
+      = link_to "Edit", edit_account_path(@account), :class => "btn btn-sm btn-warning"
+        
+
+  .col-lg-6
+    .panel.panel-success
+      .panel-heading
+        %h3 Balance
+      .panel-body
+        %h4= money(@account.balance)
+  .col-lg-6
+    .panel.panel-info
+      .panel-heading
+        %h3 Bank
+      .panel-body
+        %h4= @account.bank
+        %h4= "Type: " + @account.account_type
+  .col-lg-6
+    .blockquote
+      %p Delete this account?
+      .well
+        = link_to "Delete", @account, :method => :delete, :data => { :confirm => "Are you sure?" }, :class => "btn btn-md btn-danger"
+  %br
+.container
+  %br
+  %br
+  .col-lg-6
+    = link_to "Back", accounts_path, :class => "btn btn-default"

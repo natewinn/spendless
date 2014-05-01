@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
 
 
   def new
-    @new_account = Account.new
+    @account = Account.new
   end
 
 
@@ -20,8 +20,8 @@ class AccountsController < ApplicationController
 
 
   def create
-    @new_account = Account.new(account_params)
-    if @new_account.save
+    @account = Account.new(account_params)
+    if @account.save
       redirect_to accounts_path
     else
       redirect_to new_accounts_path
