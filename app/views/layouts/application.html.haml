@@ -26,8 +26,10 @@
             = link_to "Transactions", transactions_path
         %form.navbar-form.navbar-left
           .form-group
-          %input.col-lg-8
-            = text_field_tag "search[string_keyword]", :class => "form-control", placeholder: "Search by keyword...", type: string_keyword
+            .col-lg-9
+              = form_tag search_transactions_path, method: :get do
+                = text_field_tag "search[keyword]"
+                = submit_tag "Search"
             / .form-group
             / = f.label :first_name, :class => "col-lg-2 control-label"
             / .col-lg-10
