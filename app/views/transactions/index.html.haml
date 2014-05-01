@@ -1,7 +1,14 @@
 .container
+<<<<<<< HEAD
 	%legend Transactions
+=======
+	%legend Account Transactions
+>>>>>>> master
 
+	/= Transactions Table View =/
 	%table.table.table-hover
+		
+		/= Table Header =/
 		.thead
 			%tr
 				%th= "Type of transaction"
@@ -9,9 +16,13 @@
 				%th= "Transaction to/from"
 				%th= "Category"
 				%th= "Transaction date"
+		
+		/= Table Rows =/
 		.tbody
 			- @transactions.each do |t|
 				- if t.transaction_type == 'deposit'
+					
+					/= Credits Display as Green =/
 					%tr.success
 						%td= t.transaction_type
 						%td= money(t.amount)
@@ -19,16 +30,18 @@
 						%td= t.category
 						%td= t.transaction_date
 				- else
+
+					/= Debits Display as Red =/
 					%tr.danger
 						%td= t.transaction_type
 						%td= money(t.amount)
 						%td= t.name
 						%td= t.category
 						%td= t.transaction_date
-			%br
-			%br
-	
-	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
+						%br
+						%br
+		
+		= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
 	
 	%br
 	%br
@@ -42,14 +55,17 @@
 					Search by:
 					%br
 					
+					User Name:
+					= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
+					%br
 					Transaction type:
 					= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
 				
 					Transaction Category:
 					= select_tag 'search[cat]', options_from_collection_for_select(Transaction.all, 'category', 'category'), include_blank: true
 
-					Transaction business:
-					= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
+						Transaction business:
+						= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
 
 					%br
 
@@ -70,4 +86,3 @@
 					= submit_tag "Search"
 					%br
 					%br
-
