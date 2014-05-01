@@ -40,10 +40,7 @@
 			= form_tag search_transactions_path, method: :get do
 				Search by:
 				%br
-				
-				User Name:
-				= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
-				%br
+
 				Transaction type:
 				= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
 			
@@ -52,14 +49,6 @@
 
 				Transaction business:
 				= select_tag "search[name]", options_from_collection_for_select(Transaction.all, 'name', 'name'), include_blank: true
-
-				%br
-
-				Search by amount range:
-				= label_tag "Amount range start"
-				= number_field_tag 'search[begin_amount]'
-				= label_tag "Amount range end"
-				= number_field_tag 'search[end_amount]'
 
 				%br
 				
