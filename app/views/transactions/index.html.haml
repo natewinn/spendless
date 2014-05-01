@@ -19,7 +19,7 @@
 					%td= money(t.amount)
 					%td= t.name
 					%td= t.category
-					%td= t.transaction_date
+					%td= format_date(t.transaction_date)
 					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 			- else
 				%tr.danger
@@ -27,7 +27,7 @@
 					%td= money(t.amount)
 					%td= t.name
 					%td= t.category
-					%td= t.transaction_date
+					%td= format_date(t.transaction_date)
 					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
 
