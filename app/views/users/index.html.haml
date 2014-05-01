@@ -1,5 +1,5 @@
 .container
-	%legend User Profile
+	%legend Create Profile
 	  
 	%table.table.table-striped.table-hover
 		.thead
@@ -20,5 +20,5 @@
 					%td= user.password
 					%td= user.phone_number
 					%td= user.birthday
-					%td= button_to 'Edit', edit_user_path(user), method: "get", :class => "btn btn-xs btn-info"
+					%td= button_to 'Edit', edit_user_path(user), method: "get", :class => "btn btn-xs btn-danger"
 	= link_to "Add a User", new_user_path, :class => "btn btn-success"
