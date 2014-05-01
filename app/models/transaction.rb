@@ -2,9 +2,9 @@ class Transaction < ActiveRecord::Base
   belongs_to :account
   belongs_to :user
 
-  scope :incoming_money, -> {where(transaction_type: "Incoming")}
-  scope :outgoing_money, -> {where(transaction_type: "Outgoing")}
-  # scope :by_name, ->(name) { where('name = ?', name) }
+ #  scope :incoming_money, -> {where(transaction_type: "Incoming")}
+ #  scope :outgoing_money, -> {where(transaction_type: "Outgoing")}
+ #  # scope :by_name, ->(name) { where('name = ?', name) }
 
  #  def self.by_start_dates(begin_date)
 	# 	where('transaction_date >= ?', begin_date)
@@ -47,63 +47,73 @@ class Transaction < ActiveRecord::Base
 	# end
 
 
- #  def self.search(params)
- #  	cat = params[:cat]
- #  	name = params[:name]
- #  	begin_date = params[:begin_date]
- #  	end_date = params[:end_date]
- #  	amount = params[:amount]
- #  	begin_amount = params[:begin_amount]
- #  	end_amount = params[:end_amount]
- #  	user_id = params[:user_id]
+	def self.by_keyword(keyword)
+		where('category LIKE ?', keyword)
+	end
 
- #  	search = self.all
 
- #  	if params[:trans_type] == "Incoming"
- #  		search = search.incoming_money
- #  	elsif params[:trans_type] == "Outgoing"
- #  		search = search.outgoing_money
- #  	end
+  def self.search(params)
+  	# cat = params[:cat]
+  	# name = params[:name]
+  	# begin_date = params[:begin_date]
+  	# end_date = params[:end_date]
+  	# amount = params[:amount]
+  	# begin_amount = params[:begin_amount]
+  	# end_amount = params[:end_amount]
+  	# user_id = params[:user_id]
+  	string_keyword = params[:string_keyword]
 
- #  	if cat.present?
- #  		search = search.by_category(cat)
- #  	end
+  	search = self.all
 
- #  	if name.present?
- #  		search = search.by_name(name)
- #  	end
+  	# if params[:trans_type] == "Incoming"
+  	# 	search = search.incoming_money
+  	# elsif params[:trans_type] == "Outgoing"
+  	# 	search = search.outgoing_money
+  	# end
 
- #  	if user_id.present?
- #  		search = search.by_user_name(user_id)
- #  	end
+  	# if cat.present?
+  	# 	search = search.by_category(cat)
+  	# end
 
- #  	# if trans_date.present?
- #  	# 	search = search.where('transaction_date = ?', trans_date)
- #  	# end
+  	# if name.present?
+  	# 	search = search.by_name(name)
+  	# end
 
- #  	if (begin_date && end_date).present?
-	# 		search = search.by_dates(begin_date, end_date)
-	# 	elsif begin_date.present?
-	# 		search = search.by_start_dates(begin_date)
-	# 	elsif end_date.present?
-	# 		search = search.by_end_dates(end_date)
-	# 	end
+  	# if user_id.present?
+  	# 	search = search.by_user_name(user_id)
+  	# end
 
-	# 	# if amount.present?
-	# 	# 	search = search.by_amount(amount)
-	# 	# end
+  	if keyword.present?
+  		search = search.by_keyword(keyword)
+  	end
 
-	# 	if (begin_amount && end_amount).present?
-	# 		search = search.by_amounts(begin_amount, end_amount)
-	# 	elsif begin_amount.present?
-	# 		search = search.by_start_amounts(begin_amount)
-	# 	elsif end_amount.present?
-	# 		search = search.by_end_amounts(end_amount)
-	# 	end
+  # 	# if trans_date.present?
+  # 	# 	search = search.where('transaction_date = ?', trans_date)
+  # 	# end
 
-	# 	search
+  # 	if (begin_date && end_date).present?
+		# 	search = search.by_dates(begin_date, end_date)
+		# elsif begin_date.present?
+		# 	search = search.by_start_dates(begin_date)
+		# elsif end_date.present?
+		# 	search = search.by_end_dates(end_date)
+		# end
 
-	# end
+		# # if amount.present?
+		# # 	search = search.by_amount(amount)
+		# # end
+
+		# if (begin_amount && end_amount).present?
+		# 	search = search.by_amounts(begin_amount, end_amount)
+		# elsif begin_amount.present?
+		# 	search = search.by_start_amounts(begin_amount)
+		# elsif end_amount.present?
+		# 	search = search.by_end_amounts(end_amount)
+		# end
+
+		search
+
+	end
 
 
 end

@@ -8,12 +8,12 @@
 			%tr
 				%th= "Type of transaction"
 				%th= "Amount"
-				%th= "Transaction to/from"
+				%th= "Transaction with"
 				%th= "Category"
 				%th= "Transaction date"
 		.tbody
 		- @transactions.each do |t|
-			- if t.transaction_type == 'deposit'
+			- if t.transaction_type == 'incoming'
 				%tr.success
 					%td= t.transaction_type
 					%td= money(t.amount)
@@ -21,6 +21,7 @@
 					%td= t.category
 					%td= format_date(t.transaction_date)
 					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+					%td= button_to "Edit", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 			- else
 				%tr.danger
 					%td= t.transaction_type
@@ -29,6 +30,7 @@
 					%td= t.category
 					%td= format_date(t.transaction_date)
 					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+					%td= button_to "Edit", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
 	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
 
 .container
