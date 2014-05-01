@@ -1,11 +1,14 @@
-= f.label :amount
+=f.label "Transaction by:"
 %br
-= f.text_field :amount
+= f.select :user_id, User.all.collect {|u| [u.first_name + u.last_name, u.id]}
 %br
-= f.label :name
+=f.label "Transaction with:"
 %br
 = f.text_field :name
 %br
+= f.label :amount
+%br
+= f.text_field :amount
 %br
 = f.label :account_id
 %br
@@ -13,15 +16,18 @@
 %br
 = f.label :category
 %br
-/ =f.text_field :category
-=f.select :category, Transaction.all.collect {|t| [t.category, t.id]}, {include_blank: "Other"}
+=f.text_field :category
+/ =f.select :category, Transaction.all.collect {|t| [t.category, t.id]}, {include_blank: "Other"}
+%br
+=f.label :transaction_date
+=f.date_field :transaction_date
 %br
 Money gained or spent?
 %br
 = f.label "Gained"
-= f.radio_button :transaction_type, "Deposit"
+= f.radio_button :transaction_type, "Incoming"
 = f.label "Spent"
-= f.radio_button :transaction_type, "Withdrawal"
+= f.radio_button :transaction_type, "Outgoing"
 
 %br
 = f.submit
