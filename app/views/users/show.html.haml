@@ -1,5 +1,5 @@
-/= User Profile =/
-/ = Location Record = /
+- content_for(:title, 'Your Profile')
+
 .container
 	%legend 
 		Profile for #{@user.first_name} #{@user.last_name}
@@ -10,5 +10,5 @@
 			%h4 Password:  #{@user.password}
 			%h4 Phone Number:  #{@user.phone_number}
 			%h4 Birthday:  #{@user.birthday}
-			= link_to 'Return to Transactions', users_path, :class => "btn btn-success"
+			= link_to 'Return to Users', users_path, :class => "btn btn-success"
 			.col.md-8

@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+.deposit {
+  background-color: rgba(112, 247, 144, 0.29);
+  border-bottom:    1px #c4c4c4 solid;
+}
+
+.withdrawl {
+  background-color:rgba(226, 93, 93, 0.57);
+  border-bottom:1px #c4c4c4 solid;
+}

@@ -1,9 +1,0 @@
-%td{ :style => "padding:15px"}= "#{User.where(id: t.user_id).pluck(:first_name).first} #{User.where(id: t.user_id).pluck(:last_name).first}"
-%td{ :style => "padding:15px"}= "#{t.transaction_type}"
-%td{ :style => "padding:15px"}= "#{t.amount}"
-%td{ :style => "padding:15px"}= "#{t.name}"
-%td{ :style => "padding:15px"}= "#{t.category}"
-%td{ :style => "padding:15px"}= "#{Account.where(id: t.account_id).pluck(:bank).first} #{Account.where(id: t.account_id).pluck(:account_type).first}"
-%td{ :style => "padding:15px"}= "#{t.transaction_date}"
-%td{ :style => "padding:15px"}= button_to "Edit", edit_transaction_path(t), method: :get
-%td{ :style => "padding:15px"}= button_to "Delete", transaction_path(t), method: :delete

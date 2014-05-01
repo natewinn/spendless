@@ -1,35 +1,48 @@
+- content_for(:title, 'Transactions')
+
 .container
-	.row
-		.col-md-12
-			%table{ :style => "margin:0 auto; border-bottom:1px #ddd solid; text-align:center"}
-				%tbody
-					%tr
-						%th{ :class => "col-sm-1", :style => "text-align:center"}= "User name"
-						%th{ :class => "col-sm-1", :style => "text-align:center"}= "Type of transaction"
-						%th{ :class => "col-sm-3", :style => "text-align:center"}= "Amount"
-						%th{ :class => "col-sm-1",:style => "text-align:center"}= "Transaction to/from"
-						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Category"
-						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Account"
-						%th{ :class => "col-sm-2",:style => "text-align:center"}= "Transaction date"
-						- @transactions.each do |t|
-							- if t.transaction_type == 'Incoming'
-								%tr{ :style => "background-color:rgba(112, 247, 144, 0.29); border-bottom:1px #c4c4c4 solid"}
-									=render 'deposit', t: t
-							- else t.transaction_type == 'Outgoing'
-								%tr{ :style => "background-color:rgba(226, 93, 93, 0.57); border-bottom:1px #c4c4c4 solid"}
-									=render 'withdrawal', t: t
+	%legend Transactions
+	
+	%table.table.table-hover
+		.thead
+			%tr
+				%th= "Type of transaction"
+				%th= "Amount"
+				%th= "Transaction with"
+				%th= "Category"
+				%th= "Transaction date"
+		.tbody
+		- @transactions.each do |t|
+			- if t.transaction_type == 'incoming'
+				%tr.success
+					%td= t.transaction_type
+					%td= money(t.amount)
+					%td= t.name
+					%td= t.category
+					%td= format_date(t.transaction_date)
+					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+					%td= button_to "Edit", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+			- else
+				%tr.danger
+					%td= t.transaction_type
+					%td= money(t.amount)
+					%td= t.name
+					%td= t.category
+					%td= format_date(t.transaction_date)
+					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+					%td= button_to "Edit", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-info"
+	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
 
-
-			%br
-			%br
-			= button_to "Add Transaction", new_transaction_path, method: :get
+.container
 	.row
 		.col-md-12
 			%border-bottom
 			%br
+			
 			= form_tag search_transactions_path, method: :get do
 				Search by:
 				%br
+				
 				User Name:
 				= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
 				%br
@@ -61,4 +74,3 @@
 				= submit_tag "Search"
 				%br
 				%br
-

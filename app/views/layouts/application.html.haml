@@ -1,7 +1,8 @@
 !!!
 %html
   %head
-    %title Spendless
+    %title= full_title(yield :title)
+    = favicon_link_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -24,13 +25,25 @@
           %li
             = link_to "Transactions", transactions_path
         %form.navbar-form.navbar-left
-          %input.form-control.col-lg-8{placeholder: "Find something...", type: "text"}/
+          .form-group
+            .col-lg-9
+              = form_tag search_transactions_path, method: :get do
+                = text_field_tag "search[keyword]"
+                = submit_tag "Search"
+            / .form-group
+            / = f.label :first_name, :class => "col-lg-2 control-label"
+            / .col-lg-10
+            /   = f.text_field :first_name, :class => "form-control", type: "first_name"
         %ul.nav.navbar-nav.navbar-right
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               Direct Add
               %b.caret
             %ul.dropdown-menu
+              / %li
+              /   = link_to "Logout", logout_path
+              %li
+                = link_to "Logout", logout_path
               %li
                 = link_to "Add a User", new_user_path
               %li

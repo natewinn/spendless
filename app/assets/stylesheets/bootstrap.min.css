@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Lato:300,400,700");
+@import url(//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>);
 /*!
  * Bootswatch v3.1.1+1
  * Homepage: http://bootswatch.com
@@ -5964,4 +5964,14 @@ label,
 }
 .popover-title {
   border: none;
+}
+
+.deposit {
+  background-color: rgba(112, 247, 144, 0.29);
+  border-bottom:    1px #c4c4c4 solid;
+}
+
+.withdrawl {
+  background-color:rgba(226, 93, 93, 0.57);
+  border-bottom:1px #c4c4c4 solid;
 }

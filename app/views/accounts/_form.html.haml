@@ -1,0 +1,27 @@
+= form_for @account do |f|
+  .form-horizontal
+    .fieldset
+      .form-group
+        .col-lg-6
+          .form-group
+            = f.label "Account Owner", :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.select :user_id, User.all.collect {|u| [(u.first_name + " " + u.last_name), u.id]}, :class => "form-control"
+          .form-group
+            = f.label :account_type, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.select :account_type, types_of_accounts.each.collect {|c| [c, c]}, :class => "form-control"
+          .form-group
+            = f.label "Balance:", :class => "col-lg-2 control-label"
+            .input-group
+              .input-group-addon $
+              = f.number_field :balance, :class => "form-control"
+          .form-group
+            = f.label "Bank", :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :bank, :class => "form-control"
+          .actions
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                = f.submit 'Save', :class => "btn btn-primary"
+                = link_to 'Cancel', accounts_path, :class => "btn btn-default"
