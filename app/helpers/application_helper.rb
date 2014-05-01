@@ -13,4 +13,7 @@ module ApplicationHelper
     distance_of_time_in_words(Time.now, budget.end_date)
   end
 
+  def phone(phone_number)
+    number_to_phone(phone_number, area_code: true)  
+  end
 end
