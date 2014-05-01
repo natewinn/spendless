@@ -48,7 +48,6 @@ class Transaction < ActiveRecord::Base
 
 	def self.by_string_keyword(string_keyword)
 		where('name = ? OR transaction_type = ?', string_keyword, string_keyword)
-	end
 
 
   def self.search(params)

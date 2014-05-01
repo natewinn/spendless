@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  @string_keyword = 2
+
 	def full_title(page_title)
 		base_title = "Spendless"
 		page_title.empty? ?  base_title : "#{base_title} | #{page_title}"
