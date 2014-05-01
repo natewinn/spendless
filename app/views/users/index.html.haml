@@ -11,6 +11,7 @@
 				%th Phone Number
 				%th Birthday
 				%th Update Profile
+				%th
 		.tbody
 			- @users.each do |user|
 				%tr
@@ -21,4 +22,5 @@
 					%td= user.phone_number
 					%td= user.birthday
 					%td= button_to 'Edit', edit_user_path(user), method: "get", :class => "btn btn-xs btn-danger"
+					%td= button_to 'Delete', user, method: "delete", :class => "btn btn-xs btn-warning", :data => { :confirm => "Are you sure?" }
 	= link_to "Add a User", new_user_path, :class => "btn btn-success"
