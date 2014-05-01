@@ -4,6 +4,7 @@
 			%table{ :style => "margin:0 auto; border-bottom:1px #ddd solid; text-align:center"}
 				%tbody
 					%tr
+						%th{ :class => "col-sm-1", :style => "text-align:center"}= "User name"
 						%th{ :class => "col-sm-1", :style => "text-align:center"}= "Type of transaction"
 						%th{ :class => "col-sm-3", :style => "text-align:center"}= "Amount"
 						%th{ :class => "col-sm-1",:style => "text-align:center"}= "Transaction to/from"
@@ -28,6 +29,9 @@
 			%br
 			= form_tag search_transactions_path, method: :get do
 				Search by:
+				%br
+				User Name:
+				= select_tag "search[user_id]", options_from_collection_for_select(User.all, 'id', 'last_name'), include_blank: true
 				%br
 				Transaction type:
 				= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true

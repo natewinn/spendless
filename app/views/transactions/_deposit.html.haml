@@ -1,3 +1,4 @@
+%td{ :style => "padding:15px"}= "#{User.where(id: t.user_id).pluck(:first_name).first} #{User.where(id: t.user_id).pluck(:last_name).first}"
 %td{ :style => "padding:15px"}= "#{t.transaction_type}"
 %td{ :style => "padding:15px"}= "#{t.amount}"
 %td{ :style => "padding:15px"}= "#{t.name}"
