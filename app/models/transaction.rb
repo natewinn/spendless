@@ -46,6 +46,7 @@ class Transaction < ActiveRecord::Base
 	# 	where('user_id = ?', user_id)
 	# end
 
+
 	def self.by_keyword(keyword)
 		where('category LIKE ?', keyword)
 	end

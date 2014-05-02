@@ -24,16 +24,6 @@
             = link_to "Budgets", budgets_path
           %li
             = link_to "Transactions", transactions_path
-        %form.navbar-form.navbar-left
-          .form-group
-            .col-lg-9
-              = form_tag search_transactions_path, method: :get do
-                = text_field_tag "search[keyword]"
-                = submit_tag "Search"
-            / .form-group
-            / = f.label :first_name, :class => "col-lg-2 control-label"
-            / .col-lg-10
-            /   = f.text_field :first_name, :class => "form-control", type: "first_name"
         %ul.nav.navbar-nav.navbar-right
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}

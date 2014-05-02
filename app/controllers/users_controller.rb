@@ -44,6 +44,7 @@ class UsersController < ApplicationController
 
 	def dashboard
 		@user = User.find(params[:id])
+		render :show
 	end
 
 	private
