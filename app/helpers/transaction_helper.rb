@@ -3,14 +3,15 @@ module TransactionHelper
   def categories
 
     categories = [
-    "food",
-    "entertainment",
-    "utilities",
-    "mortgage",
-    "clothing",
-    "auto",
-    "education",
-    "daycare"
+    "Food",
+    "Entertainment",
+    "Utilities",
+    "Mortgage",
+    "Clothing",
+    "Auto",
+    "Education",
+    "Daycare",
+    "Other"
     ]
   end
   
