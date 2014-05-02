@@ -1,22 +1,30 @@
-- content_for(:title, 'Your Profile')
+- content_for(:title, 'Users')
 
-- @users.each do |user|
-  .container
-    %legend 
-      Profile for #{user.first_name} #{user.last_name}
-      .col-md-12
-        %h6.col.md-4
-        %h4 Name:  #{user.first_name} #{user.last_name}
-        %h4 Email:  #{user.email}
-        %h4 Phone Number:  #{phone(user.phone_number)}
-        %h4 Birthday: #{format_date(user.birthday)}
-        = button_to 'Edit Profile', edit_user_path(user), method: "get", :class => "btn btn-xs btn-warning"
-        = button_to 'Delete Profile', user, method: "delete", :class => "btn btn-xs btn-danger", :data => { :confirm => "Are you sure you want to delete?" }
-        .col.md-8
-        %br
-        %br   
-    = render :template => 'budgets/index'
-    %br
-    = render :template => 'accounts/index'
-    %br
-    = render :template => 'transactions/index'
+.container
+  %legend Create Profile
+    
+  %table.table.table-striped.table-hover
+    .thead
+      %tr
+        %th First Name
+        %th Last Name
+        %th Email
+        %th Password
+        %th Phone Number
+        %th Birthday
+        %th Update Profile
+        %th Delete Profile
+    .tbody
+      - @users.each do |user|
+        %tr
+          %td= user.first_name
+          %td= user.last_name
+          %td= user.email
+          %td= user.password
+          %td= phone(user.phone_number)
+          %td= user.budget.start_date
+          %td= button_to 'Edit', edit_user_path(user), method: "get", :class => "btn btn-xs btn-warning"
+          %td= button_to 'Delete', user, method: "delete", :class => "btn btn-xs btn-danger", :data => { :confirm => "Are you sure you want to delete?" }
+  = link_to "Add a User", new_user_path, :class => "btn btn-success"
+
+  = render @budgets.limit
