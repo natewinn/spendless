@@ -1,0 +1,7 @@
+%td= money(t.amount)
+%td= t.name
+%td= t.category
+%td= format_date(t.transaction_date)
+%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-default"
+%td= button_to "Edit", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-default"
+%td= button_to "Delete", transaction_path(t), method: :delete, :class => "btn btn-xs btn-default"
