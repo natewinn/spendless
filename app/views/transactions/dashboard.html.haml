@@ -15,14 +15,15 @@
 		= submit_tag "Search", :class => "button btn btn-budget btn-lg btn-block"
 
 .container
-	%legend Transactions
+	%legend Transactions for current month
+	
 	%ul.nav.nav-tabs{style: "margin-bottom: 15px;"}
 		%li.active
 			%a{"data-toggle" => "tab", href: "#all"} Show all
 		%li
-			%a{"data-toggle" => "tab", href: "#withdrawal"} Withdrawals
+			%a{"data-toggle" => "tab", href: "#expense"} Expenses
 		%li
-			%a{"data-toggle" => "tab", href: "#deposit"} Deposits
+			%a{"data-toggle" => "tab", href: "#income"} Income
 	#myTabContent.tab-content
 		#all.tab-pane.fade.active.in
 			%table.table.table-hover
@@ -32,19 +33,17 @@
 						%th= "Transaction with"
 						%th= "Category"
 						%th= "Transaction date"
-						%th= "View"
-						%th= "Edit"
-						%th= "Delete"
 
 				.tbody
 				- @transactions.each do |t|
-					- if t.transaction_type == 'deposit'
-						%tr.success
-							=render 'tcells', :t => t
-					- else
-						%tr.danger
-							=render 'tcells', t: t
-		#withdrawal.tab-pane.fade
+					-if t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
+						- if t.transaction_type == 'income'
+							%tr.btn-success
+								=render 'tcells', :t => t
+						- else
+							%tr.danger
+								=render 'tcells', t: t
+		#expense.tab-pane.fade
 			%table.table.table-hover
 				.thead
 					%tr
@@ -52,18 +51,15 @@
 						%th= "Transaction with"
 						%th= "Category"
 						%th= "Transaction date"
-						%th= "View"
-						%th= "Edit"
-						%th= "Delete"
 
 				.tbody
 				- @transactions.each do |t|
-					- if t.transaction_type == 'withdrawal'
+					- if t.transaction_type == 'expense' && t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
 						%tr.danger
 							=render 'tcells', t: t
 					- else
 						%tr
-		#deposit.tab-pane.fade
+		#income.tab-pane.fade
 			%table.table.table-hover
 				.thead
 					%tr
@@ -71,13 +67,10 @@
 						%th= "Transaction with"
 						%th= "Category"
 						%th= "Transaction date"
-						%th= "View"
-						%th= "Edit"
-						%th= "Delete"
 
 				.tbody
 				- @transactions.each do |t|
-					- if t.transaction_type == 'deposit'
+					- if t.transaction_type == 'income' && t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
 						%tr.success
 							=render 'tcells', t: t
 					- else
