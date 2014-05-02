@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
 
+  get 'dashboard' => 'transactions#dashboard'
+
   resources :users do
     member do
       get :dashboard

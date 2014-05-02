@@ -1,6 +1,8 @@
 class BudgetsController < ApplicationController
   before_action :set_budget, only: [:show, :edit, :update, :destroy]
 
+  attr_accessor :limit, :start_date, :end_date
+
   def index
     @budgets = Budget.all
   end

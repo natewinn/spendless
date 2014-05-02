@@ -1,0 +1,86 @@
+- content_for(:title, 'Your Dashboard')
+
+.container
+
+	.col-md-3
+		.budget-box-heading Account Balance: 
+	.col-md-3
+		.budget-box-heading Budget Remaining:
+	.col-md-6
+	.col-md-2
+		= date_field "search[begin_date]", :class => "label control-label inline"
+	.col-md-2
+		= date_field "search[end_date]", :class => "label control-label inline"
+	.col-md-2
+		= submit_tag "Search", :class => "button btn btn-budget btn-lg btn-block"
+
+.container
+	%legend Transactions
+	%ul.nav.nav-tabs{style: "margin-bottom: 15px;"}
+		%li.active
+			%a{"data-toggle" => "tab", href: "#all"} Show all
+		%li
+			%a{"data-toggle" => "tab", href: "#withdrawal"} Withdrawals
+		%li
+			%a{"data-toggle" => "tab", href: "#deposit"} Deposits
+	#myTabContent.tab-content
+		#all.tab-pane.fade.active.in
+			%table.table.table-hover
+				.thead
+					%tr
+						%th= "Amount"
+						%th= "Transaction with"
+						%th= "Category"
+						%th= "Transaction date"
+						%th= "View"
+						%th= "Edit"
+						%th= "Delete"
+
+				.tbody
+				- @transactions.each do |t|
+					- if t.transaction_type == 'deposit'
+						%tr.success
+							=render 'tcells', :t => t
+					- else
+						%tr.danger
+							=render 'tcells', t: t
+		#withdrawal.tab-pane.fade
+			%table.table.table-hover
+				.thead
+					%tr
+						%th= "Amount"
+						%th= "Transaction with"
+						%th= "Category"
+						%th= "Transaction date"
+						%th= "View"
+						%th= "Edit"
+						%th= "Delete"
+
+				.tbody
+				- @transactions.each do |t|
+					- if t.transaction_type == 'withdrawal'
+						%tr.danger
+							=render 'tcells', t: t
+					- else
+						%tr
+		#deposit.tab-pane.fade
+			%table.table.table-hover
+				.thead
+					%tr
+						%th= "Amount"
+						%th= "Transaction with"
+						%th= "Category"
+						%th= "Transaction date"
+						%th= "View"
+						%th= "Edit"
+						%th= "Delete"
+
+				.tbody
+				- @transactions.each do |t|
+					- if t.transaction_type == 'deposit'
+						%tr.success
+							=render 'tcells', t: t
+					- else
+						%tr
+
+	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"

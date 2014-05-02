@@ -3,11 +3,16 @@ class UsersController < ApplicationController
 	skip_filter :ensure_logged_in, only: [:new, :create]
 
 	def index
-		@users = User.all
+#		@users = User.all
+		@users = User.includes(:budget)
 	end
 
 	def new
 		@user = User.new
+	end
+
+	def show_dashboard
+		@users = User.find(params[:id])
 	end
 
 	def show
@@ -42,10 +47,10 @@ class UsersController < ApplicationController
 		redirect_to users_path
 	end
 
-	def dashboard
-		@user = User.find(params[:id])
-		render :show
-	end
+	# def dashboard
+	# 	@user = User.find(params[:id])
+	# 	render :show
+	# end
 
 	private
 
