@@ -1,6 +1,5 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
-  belongs_to :user
 
   scope :incoming_money, -> {where(transaction_type: "income")}
   scope :outgoing_money, -> {where(transaction_type: "expense")}

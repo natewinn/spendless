@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   has_many :accounts
-  has_many :transactions
+  has_many :transactions, through: :accounts
   has_one :budget
 
 end
