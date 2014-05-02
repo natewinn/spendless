@@ -1,58 +1,86 @@
 - content_for(:title, 'Home')
 
 .container
-	.col-md-12	
-		.col-md-3
-			.col-md-2.budget-box-heading
-				Account Balance: 
-			.col-md-1.budget-box-amount-positive 
-				$100
-		.col-md-3
-			.budget-box-heading Budget Remaining:
-		.col-md-6
-		.col-md-2
-			= date_field "search[begin_date]", :class => "label control-label inline"
-		.col-md-2
-			= date_field "search[end_date]", :class => "label control-label inline"
-		.col-md-2
-			= submit_tag "Search", :class => "button btn btn-budget btn-lg btn-block"
+
+	.col-md-3
+		.budget-box-heading Account Balance: 
+	.col-md-3
+		.budget-box-heading Budget Remaining:
+	.col-md-6
+	.col-md-2
+		= date_field "search[begin_date]", :class => "label control-label inline"
+	.col-md-2
+		= date_field "search[end_date]", :class => "label control-label inline"
+	.col-md-2
+		= submit_tag "Search", :class => "button btn btn-budget btn-lg btn-block"
 
 .container
 	%legend Transactions
+	%ul.nav.nav-tabs{style: "margin-bottom: 15px;"}
+		%li.active
+			%a{"data-toggle" => "tab", href: "#all"} Show all
+		%li
+			%a{"data-toggle" => "tab", href: "#withdrawal"} Withdrawals
+		%li
+			%a{"data-toggle" => "tab", href: "#deposit"} Deposits
+	#myTabContent.tab-content
+		#all.tab-pane.fade.active.in
+			%table.table.table-hover
+				.thead
+					%tr
+						%th= "Amount"
+						%th= "Transaction with"
+						%th= "Category"
+						%th= "Transaction date"
+						%th= "View"
+						%th= "Edit"
+						%th= "Delete"
 
-.container
-	.col-md-12
-	%table.table.table-hover
-		.thead
-			%tr
-				%th= "Amount"
-				%th= "Payee"
-				%th= "Category"
-				%th= "Date"
-				%th= "View"
-				%th= "Update"
-		.tbody
-		- @transactions.each do |t|
-			- if t.transaction_type == 'deposit'
-				%tr.success
-					%td= money(t.amount)
-					%td= t.name
-					%td= t.category
-					%td= format_date(t.transaction_date)
-					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-default"
-					%td= button_to "Update", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-default"
-			- else
-				%tr.danger
-					%td= money(t.amount)
-					%td= t.name
-					%td= t.category
-					%td= format_date(t.transaction_date)
-					%td= button_to "View", transaction_path(t), method: "get", :class => "btn btn-xs btn-default"
-					%td= button_to "Update", edit_transaction_path(t), method: "get", :class => "btn btn-xs btn-default"
+				.tbody
+				- @transactions.each do |t|
+					- if t.transaction_type == 'deposit'
+						%tr.success
+							=render 'tcells', :t => t
+					- else
+						%tr.danger
+							=render 'tcells', t: t
+		#withdrawal.tab-pane.fade
+			%table.table.table-hover
+				.thead
+					%tr
+						%th= "Amount"
+						%th= "Transaction with"
+						%th= "Category"
+						%th= "Transaction date"
+						%th= "View"
+						%th= "Edit"
+						%th= "Delete"
+
+				.tbody
+				- @transactions.each do |t|
+					- if t.transaction_type == 'withdrawal'
+						%tr.danger
+							=render 'tcells', t: t
+					- else
+						%tr
+		#deposit.tab-pane.fade
+			%table.table.table-hover
+				.thead
+					%tr
+						%th= "Amount"
+						%th= "Transaction with"
+						%th= "Category"
+						%th= "Transaction date"
+						%th= "View"
+						%th= "Edit"
+						%th= "Delete"
+
+				.tbody
+				- @transactions.each do |t|
+					- if t.transaction_type == 'deposit'
+						%tr.success
+							=render 'tcells', t: t
+					- else
+						%tr
+
 	= link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
-
-.container
-	.row
-		.col-md-12
-			%border-bottom
-			%br
