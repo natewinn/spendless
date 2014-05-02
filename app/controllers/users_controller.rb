@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 	end
 
 	def show_dashboard
-		@users = User.find(params[:id])
+		@user = User.find(params[:id])
 	end
 
 	def show
