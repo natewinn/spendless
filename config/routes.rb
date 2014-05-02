@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
 
-  get 'dashboard' => 'transactions#dashboard'
+  get 'dashboard' => 'users#dashboard'
 
   root to: 'sessions#new'
 

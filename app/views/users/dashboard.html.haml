@@ -1,30 +1,80 @@
-- content_for(:title, 'Users')
+.container
+
+  .col-md-3
+    .budget-box-heading Total Account Balance: 
+    = @current_user.accounts.first.balance
+    
+  .col-md-3
+    .budget-box-heading Budget Remaining:
+    = @current_user.budget.limit
+  .col-md-6
+  .col-md-2
+    = date_field "search[begin_date]", :class => "label control-label inline"
+  .col-md-2
+    = date_field "search[end_date]", :class => "label control-label inline"
+  .col-md-2
+    = submit_tag "Search", :class => "button btn btn-budget btn-lg btn-block"
 
 .container
-  %legend Create Profile
-    
-  %table.table.table-striped.table-hover
-    .thead
-      %tr
-        %th First Name
-        %th Last Name
-        %th Email
-        %th Password
-        %th Phone Number
-        %th Birthday
-        %th Update Profile
-        %th Delete Profile
-    .tbody
-      - @users.each do |user|
-        %tr
-          %td= user.first_name
-          %td= user.last_name
-          %td= user.email
-          %td= user.password
-          %td= phone(user.phone_number)
-          %td= user.budget.start_date
-          %td= button_to 'Edit', edit_user_path(user), method: "get", :class => "btn btn-xs btn-warning"
-          %td= button_to 'Delete', user, method: "delete", :class => "btn btn-xs btn-danger", :data => { :confirm => "Are you sure you want to delete?" }
-  = link_to "Add a User", new_user_path, :class => "btn btn-success"
+  %legend Transactions for current month
+  
+  %ul.nav.nav-tabs{style: "margin-bottom: 15px;"}
+    %li.active
+      %a{"data-toggle" => "tab", href: "#all"} Show all
+    %li
+      %a{"data-toggle" => "tab", href: "#expense"} Expenses
+    %li
+      %a{"data-toggle" => "tab", href: "#income"} Income
+  #myTabContent.tab-content
+    #all.tab-pane.fade.active.in
+      %table.table.table-hover
+        .thead
+          %tr
+            %th= "Amount"
+            %th= "Transaction with"
+            %th= "Category"
+            %th= "Transaction date"
 
-  = render @budgets.limit
+        .tbody
+        - Transaction.all.each do |t|
+          -if t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
+            - if t.transaction_type == 'income'
+              %tr.btn-success
+                =render 'tcells', :t => t
+            - elsif t.transaction_type == 'expense'
+              %tr.danger
+                =render 'tcells', t: t
+    #expense.tab-pane.fade
+      %table.table.table-hover
+        .thead
+          %tr
+            %th= "Amount"
+            %th= "Transaction with"
+            %th= "Category"
+            %th= "Transaction date"
+
+        .tbody
+        - Transaction.all.each do |t|
+          - if t.transaction_type == 'expense' && t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
+            %tr.danger
+              =render 'tcells', t: t
+          - else
+            %tr
+    #income.tab-pane.fade
+      %table.table.table-hover
+        .thead
+          %tr
+            %th= "Amount"
+            %th= "Transaction with"
+            %th= "Category"
+            %th= "Transaction date"
+
+        .tbody
+        - Transaction.all.each do |t|
+          - if t.transaction_type == 'income' && t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
+            %tr.success
+              =render 'tcells', t: t
+          - else
+            %tr
+
+  = link_to "Add Transaction", new_transaction_path, :class => "btn btn-success"
