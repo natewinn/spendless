@@ -27,7 +27,7 @@
           .form-group
             = f.label "Transaction type:", :class => "col-lg-2 control-label"
             .col-lg-10
-              = f.select :transaction_type, options_for_select([["Deposit", "deposit"], ["Withdrawal", "withdrawal"]]), :class => "form-control"
+              = f.select :transaction_type, options_for_select([["Income", "income"], ["Expense", "expense"]]), :class => "form-control"
 
           .actions
             .form-group
