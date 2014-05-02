@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'transactions#dashboard'
 
+  root to: 'sessions#new'
+
   resources :users do
     member do
       get :dashboard
