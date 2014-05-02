@@ -2,8 +2,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :account
   belongs_to :user
 
-  scope :incoming_money, -> {where(transaction_type: "Incoming")}
-  scope :outgoing_money, -> {where(transaction_type: "Outgoing")}
+  scope :incoming_money, -> {where(transaction_type: "income")}
+  scope :outgoing_money, -> {where(transaction_type: "expense")}
   # scope :by_name, ->(name) { where('name = ?', name) }
 
   def self.by_start_dates(begin_date)
@@ -65,9 +65,9 @@ class Transaction < ActiveRecord::Base
 
   	search = self.all
 
-  	if params[:trans_type] == "Incoming"
+  	if params[:trans_type] == "Income"
   		search = search.incoming_money
-  	elsif params[:trans_type] == "Outgoing"
+  	elsif params[:trans_type] == "Expenses"
   		search = search.outgoing_money
   	end
 

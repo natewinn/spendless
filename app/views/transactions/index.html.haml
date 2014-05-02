@@ -82,7 +82,7 @@
 				%br
 
 				Transaction type:
-				= select_tag "search[trans_type]", options_for_select(["Incoming", "Outgoing"]), include_blank: true
+				= select_tag "search[trans_type]", options_for_select(["Income", "Expenses"]), include_blank: true
 			
 				Transaction Category:
 				= select("search", "cat", categories.each.collect {|c| [c, c]}, { include_blank: true })
