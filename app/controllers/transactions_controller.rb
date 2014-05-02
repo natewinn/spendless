@@ -4,6 +4,9 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
+  def dashboard
+    @transactions = Transaction.all
+  end
 
   def show
     @transaction = Transaction.find(params[:id])
