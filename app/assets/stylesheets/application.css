@@ -43,15 +43,24 @@
 	margin: 0 0 30px;
 }*/
 
-.budget-box-heading {
+.budget-box-heading-title {
 	background-color: #4e5d6c;
-	width: 100%;
+	width: 70%;
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: inherit;
   color: #ebebeb;
   float: left;
+}
 
+.budget-box-heading-dollars {
+	background-color: #4e5d6c;
+	width: 30%;
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: inherit;
+  color: #ebebeb;
+  float: right;
 }
 
 .budget-box-amount-positive {
@@ -100,6 +109,13 @@ padding: 9px 24px;
 font-size: 19px;
 line-height: 1.33;
 border-radius: 0;
+color: #ffffff;
+background-color: #4e5d6c;
+border-color: transparent;
+}
+
+.btn-budget:hover {
+  background-color: #485563;
 }
 
 .top-container {
