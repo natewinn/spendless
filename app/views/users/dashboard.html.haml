@@ -1,0 +1,30 @@
+- content_for(:title, 'Your Dashboard')
+
+.container
+	%legend #{@user.first_name} #{@user.last_name}'s Dashboard
+	  .col-md-12
+			%h6.col.md-4
+			%h4 Name:  #{@user.first_name} #{@user.last_name}
+			%h4 Email:  #{@user.email}
+			%h4 Password:  #{@user.password}
+			%h4 Phone Number:  #{@user.phone_number}
+			%h4 Birthday:  #{@user.birthday}
+			= link_to 'Return to Users', users_path, :class => "btn btn-success"
+			.col.md-8
+
+	%table.table.table-striped.table-hover
+    .thead
+      %tr
+        %th Owner
+        %th The Limit
+        %th Time Remaining
+        %th
+    .tbody
+      - @budgets.each do |budget|
+        %tr
+          %td= budget.user.first_name + " " + budget.user.last_name + "'s"
+          %td= number_to_currency(budget.limit)
+          %td= budget_countdown(budget)
+          %td= button_to "View", budget_path(budget), method: "get", :class => "btn btn-xs btn-info"
+
+  = link_to "Add a Budget", new_budget_path, :class => "btn btn-success"

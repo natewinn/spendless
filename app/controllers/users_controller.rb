@@ -2,11 +2,16 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@users = User.all
+#		@users = User.all
+		@users = User.includes(:budget)
 	end
 
 	def new
 		@user = User.new
+	end
+
+	def show_dashboard
+		@users = User.find(params[:id])
 	end
 
 	def show
