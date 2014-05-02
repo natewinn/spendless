@@ -42,10 +42,10 @@ class UsersController < ApplicationController
 		redirect_to users_path
 	end
 
-	def dashboard
-		@user = User.find(params[:id])
-		render :show
-	end
+	# def dashboard
+	# 	@user = User.find(params[:id])
+	# 	render :show
+	# end
 
 	private
 
