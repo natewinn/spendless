@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	skip_filter :ensure_logged_in, only: [:new, :create]
 
 	def index
-#		@users = User.all
+    # @users = User.all
 		@users = User.includes(:budget)
 	end
 

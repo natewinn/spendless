@@ -1,12 +1,14 @@
 .container
 
   .col-md-3
-    .budget-box-heading Total Account Balance: 
-    = @current_user.accounts.first.balance
+    .budget-box-heading Total Account Balance:
+    - unless @current_user.accounts.empty?
+      = @current_user.accounts.first.balance
     
   .col-md-3
     .budget-box-heading Budget Remaining:
-    = @current_user.budget.limit
+    - unless @current_user.budget.nil?
+      = @current_user.budget.limit
   .col-md-6
   .col-md-2
     = date_field "search[begin_date]", :class => "label control-label inline"

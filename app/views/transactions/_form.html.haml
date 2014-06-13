@@ -4,9 +4,9 @@
       .form-group
         .col-lg-6
           .form-group
-            = f.label "Account Owner", :class => "col-lg-2 control-label"
+            = f.label "Account", :class => "col-lg-2 control-label"
             .col-lg-10
-              = f.select :user_id, User.all.collect {|u| [(u.first_name + " " + u.last_name), u.id]}, :class => "form-control"
+              = f.select :account_id, Account.all.collect {|a| [(a.bank + " " + a.account_type), a.id]}, :class => "form-control" 
           .form-group
             = f.label "Transaction with:", :class => "col-lg-2 control-label"
             .col-lg-10
@@ -19,7 +19,7 @@
           .form-group
             = f.label :transaction_date, :class => "col-lg-2 control-label"
             .col-lg-10
-              = f.date_select :transaction_date, :class => "form-control"
+              = f.date_select :transaction_date, :start_year => Time.now.year, :end_year => 1927, :class => "form-control"
           .form-group
             = f.label :category, :class => "col-lg-2 control-label"
             .col-lg-10

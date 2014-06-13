@@ -3,7 +3,7 @@
 .container
 
 	.col-md-3
-		.budget-box-heading Account Balance: 
+		.budget-box-heading Total Account Balance:
 	.col-md-3
 		.budget-box-heading Budget Remaining:
 	.col-md-6
@@ -35,7 +35,7 @@
 						%th= "Transaction date"
 
 				.tbody
-				- @transactions.each do |t|
+				- Transaction.all.each do |t|
 					-if t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
 						- if t.transaction_type == 'income'
 							%tr.btn-success
@@ -53,7 +53,7 @@
 						%th= "Transaction date"
 
 				.tbody
-				- @transactions.each do |t|
+				- Transaction.all.each do |t|
 					- if t.transaction_type == 'expense' && t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
 						%tr.danger
 							=render 'tcells', t: t
@@ -69,7 +69,7 @@
 						%th= "Transaction date"
 
 				.tbody
-				- @transactions.each do |t|
+				- Transaction.all.each do |t|
 					- if t.transaction_type == 'income' && t.transaction_date.strftime("%Y-%m") == Date.today.strftime("%Y-%m")
 						%tr.success
 							=render 'tcells', t: t

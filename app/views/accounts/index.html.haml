@@ -12,14 +12,15 @@
 				%th= "Edit"
 				%th= "Remove"
 		.tbody
-			- @accounts.each do |a|
-				%tr
-					%td= a.user.first_name + " " + a.user.last_name
-					%td= a.bank
-					%td= a.account_type
-					%td= money(a.balance)
-					%td= button_to "View", account_path(a), method: "get", :class => "btn btn-xs btn-info"
-					%td= button_to "Delete", a, method: "delete", :class => "btn btn-xs btn-warning", :data => { :confirm => "Are you sure?" }
+			- unless @accounts.nil?
+				- @accounts.each do |a|
+					%tr
+						%td= a.user.first_name + " " + a.user.last_name
+						%td= a.bank
+						%td= a.account_type
+						%td= money(a.balance)
+						%td= button_to "View", account_path(a), method: "get", :class => "btn btn-xs btn-info"
+						%td= button_to "Delete", a, method: "delete", :class => "btn btn-xs btn-warning", :data => { :confirm => "Are you sure?" }
 
 	%br
 	= button_to "Add an Account", new_account_path, method: :get, :class => "btn btn-success"

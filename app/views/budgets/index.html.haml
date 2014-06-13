@@ -10,11 +10,12 @@
         %th Time Remaining
         %th
     .tbody
-      - @budgets.each do |budget|
-        %tr
-          %td= budget.user.first_name + " " + budget.user.last_name + "'s"
-          %td= number_to_currency(budget.limit)
-          %td= budget_countdown(budget)
-          %td= button_to "View", budget_path(budget), method: "get", :class => "btn btn-xs btn-info"
+      - unless @budgets.nil?
+        - @budgets.each do |budget|
+          %tr
+            %td= budget.user.first_name + " " + budget.user.last_name + "'s"
+            %td= number_to_currency(budget.limit)
+            %td= budget_countdown(budget)
+            %td= button_to "View", budget_path(budget), method: "get", :class => "btn btn-xs btn-info"
 
   = link_to "Add a Budget", new_budget_path, :class => "btn btn-success"
